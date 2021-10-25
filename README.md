@@ -1,2 +1,2 @@
 # tcp-aes-rsa-protocol
-TCP AES-RSA 프로토콜
+TCP AES-RSA_GCM 프로토콜
