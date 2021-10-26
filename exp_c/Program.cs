@@ -27,11 +27,8 @@ var vef_buf = Encoding.ASCII.GetBytes("test1");
     stream.ReadTimeout = -1;
 
     // 프로토콜 이름 확인
-    if (vef_buf.Length != count) throw new Exception("프로토콜 불일치");
-    for (int i = 0; i < vef_buf.Length; i++) {
-        if (vef_buf[i] != buffer[i]) throw new Exception("프로토콜 불일치");
-        vef_buf[i] = unchecked((byte)(vef_buf[i] + (149 + i)));
-    }
+    if (EqualSwapVefBuf(vef_buf, buffer, count))
+        throw new Exception("프로토콜 불일치");
 
     Console.WriteLine("프로토콜 이름 확인됨.");
 
@@ -119,12 +116,39 @@ Console.WriteLine($"암호화키 받음: {BitConverter.ToString(key).Replace('-'
             Array.Resize(ref buffer, buf_size);
 
         Console.WriteLine($"버퍼 크기: {buf_size}");
+
+        SwapVefBuf(vef_buf);
+
+        body = Encrypt(siv, nonce,vef_buf, out tag);
     }
 }
 
 Console.WriteLine("프로토콜 연결됨.");
 
 Console.ReadLine();
+
+bool EqualSwapVefBuf(byte[] vef_buf, byte[] des, int? desCount = null) {
+    desCount ??= des.Length;
+    if (vef_buf.Length != desCount) return false;
+    for (int i = 0; i < vef_buf.Length; i++) {
+        if (vef_buf[i] != buffer[i]) return false;
+        vef_buf[i] = unchecked((byte)(vef_buf[i] + (149 + i)));
+    } 
+    return true;
+}
+
+bool EqualBuf(byte[] buf1, byte[] buf2, int? buf1Count = null) {
+    buf1Count ??= buf1.Length;
+    if (buf1Count != buf2.Length) return false;
+    for (int i = 0; i < buf1Count; i++)
+        if (buf1[i] != buf2[i]) return false;
+    return true;
+}
+
+void SwapVefBuf(byte[] buf) {
+    for (int i = 0; i < buf.Length; i++)
+        buf[i] = unchecked((byte)(buf[i] + (149 + i)));
+}
 
 void MakePacket(byte head, byte[] tag, byte[] body, out byte[] buf) {
     buf = new byte[1 + tag.Length + body.Length];
