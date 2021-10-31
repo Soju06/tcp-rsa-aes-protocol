@@ -1,6 +1,6 @@
-# tcp-aes-rsa-protocol
-TCP AES-RSA_GCM 프로토콜
+# tcp-rsa-aes-protocol
+TCP RSA-AES_GCM 프로토콜
 
 ## 프로토콜 정의
 
-![tcp-aes-rsa-protocol](tcp-aes-rsa-protocol.png)
+![tcp-rsa-aes-protocol](tcp-aes-rsa-protocol.png)
