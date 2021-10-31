@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exp", "exp\exp.csproj", "{EE667A20-905E-48EB-9001-AE6ECE1EA733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "exp", "exp\exp.csproj", "{EE667A20-905E-48EB-9001-AE6ECE1EA733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exp_c", "exp_c\exp_c.csproj", "{60DC674B-D5FA-4E2F-9C40-BBC18780DEA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "exp_c", "exp_c\exp_c.csproj", "{60DC674B-D5FA-4E2F-9C40-BBC18780DEA4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraNET", "TraNET\TraNET.csproj", "{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{60DC674B-D5FA-4E2F-9C40-BBC18780DEA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60DC674B-D5FA-4E2F-9C40-BBC18780DEA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60DC674B-D5FA-4E2F-9C40-BBC18780DEA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
