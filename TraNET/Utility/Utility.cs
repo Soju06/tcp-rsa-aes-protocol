@@ -5,5 +5,11 @@
             random.NextBytes(buf);
             return buf[0];
         }
+
+        public static byte[] NextBytes(this Random random, int length) {
+            var buf = new byte[length];
+            random.NextBytes(buf);
+            return buf;
+        }
     }
 }

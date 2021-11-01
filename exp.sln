@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "exp_c", "exp_c\exp_c.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraNET", "TraNET\TraNET.csproj", "{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraNET.Test", "TraNET.Test\TraNET.Test.csproj", "{B6057E4D-3800-4EA8-962D-AA439AA68714}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CCF72B2-7C64-4A35-8DBA-3E9FAF59770E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6057E4D-3800-4EA8-962D-AA439AA68714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6057E4D-3800-4EA8-962D-AA439AA68714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6057E4D-3800-4EA8-962D-AA439AA68714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6057E4D-3800-4EA8-962D-AA439AA68714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

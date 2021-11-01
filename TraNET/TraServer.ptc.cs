@@ -1,46 +1,33 @@
 ﻿namespace TraNET {
     partial class TraServer {
-        protected ReadOnlyMemory<byte> greetingData = TraNET.DefaultProtocolName;
+        protected List<TraClient> clients = new();
 
-        /// <summary>
-        /// 인사 데이터
-        /// </summary>
-        /// <exception cref="ArgumentNullException" />
-        public ReadOnlyMemory<byte> GreetingData {
-            get => greetingData;
-            set {
-                if (value.IsEmpty || value.Length < 1) throw new ArgumentException("데이터가 없습니다.");
-                greetingData = value;
-            }
-        }
-
-        /// <summary>
-        /// 인사 데이터
-        /// </summary>
-        public string GreetingText {
-            set {
-                if (value == null) throw new ArgumentNullException("value");
-                greetingData = new(TraNET.GetSHA256Hash(value));
-            }
-        }
+        public int SessionCount => clients.Count;
 
         protected virtual async Task Process(TcpClient client) {
+            TraClient? tc = null;
             try {
-                
-            } catch (Exception ex) {
-
+                tc = new TraClient(client);
+                await tc.Process_server_side(this, new TRACLIENTINFO(greetingData, BufferSize), default);
+                if (!tc.IsConnected) throw new ProtocolInitializationException("초기화에 실패했습니다.");
+                clients.Add(tc);
+            } catch {
+                client.Close();
+                tc?.Dispose();
+                return;
             }
-            client.Close();
+
+            OnSessionReady?.Invoke(this, new(tc));
         }
-    }
 
-    public readonly struct TRACLIENTINFO {
-        public ReadOnlyMemory<byte> _greetingData { get; }
-        public int _bufferSize { get; }
-
-        public TRACLIENTINFO(ReadOnlyMemory<byte> greetingData, int bufferSize) {
-            _greetingData = greetingData;
-            _bufferSize = bufferSize;
+        /// <summary>
+        /// 접속 관리
+        /// </summary>
+        protected virtual void ConnectionManage() {
+            var token = cancel.Token;
+            while (!token.IsCancellationRequested) {
+                clients
+            }
         }
     }
 }

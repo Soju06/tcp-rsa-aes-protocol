@@ -31,4 +31,15 @@
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
+
+    /// <summary>
+    /// 프로토콜 취소됨
+    /// </summary>
+    [Serializable]
+    public class ProtocolCancellationException : Exception {
+        public ProtocolCancellationException() { }
+        public ProtocolCancellationException(string message) : base(message) { }
+        public ProtocolCancellationException(string message, int code) : base(message + $" (CODE: {code})") { }
+        public ProtocolCancellationException(string message, Exception inner) : base(message, inner) { }
+    }
 }

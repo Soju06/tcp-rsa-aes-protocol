@@ -4,7 +4,7 @@ namespace TraNET {
     /// <summary>
     /// 트라-넷
     /// </summary>
-    public static class TraNET {
+    public static class TraNet {
         /// <summary>
         /// 프로토콜 버전
         /// </summary>
@@ -24,30 +24,5 @@ namespace TraNET {
         /// 기본 버퍼 사이즈
         /// </summary>
         public static readonly int DefaultBufferSize = 8192;
-
-        internal static readonly SHA256 SHA256 = SHA256.Create();
-        internal static readonly Random Random = new();
-
-        /// <summary>
-        /// sha256 해시
-        /// </summary>
-        /// <param name="data">데이터</param>
-        /// <returns>32바이트</returns>
-        /// <exception cref="ArgumentNullException" />
-        internal static byte[] GetSHA256Hash(this byte[] data) {
-            if (data == null) throw new ArgumentNullException("data");
-            return SHA256.ComputeHash(data);
-        }
-
-        /// <summary>
-        /// sha256 해시
-        /// </summary>
-        /// <param name="data">데이터</param>
-        /// <returns>32바이트</returns>
-        /// <exception cref="ArgumentNullException" />
-        internal static byte[] GetSHA256Hash(this string data) {
-            if (data == null) throw new ArgumentNullException("data");
-            return GetSHA256Hash(Encoding.UTF8.GetBytes(data));
-        }
     }
 }
