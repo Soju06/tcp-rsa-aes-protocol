@@ -3,7 +3,7 @@
         /// <summary>
         /// 클라이언트가 연결되었습니다.
         /// </summary>
-        public event ConnectionEventHandler OnConnection;
+        public event SessionConnectionEventHandler OnConnection;
 
         /// <summary>
         /// 세션이 시작되었습니다.
@@ -14,6 +14,11 @@
         /// 세션이 준비되었습니다.
         /// </summary>
         public event SessionReadyEventHandler OnSessionReady;
+
+        /// <summary>
+        /// 세션이 끊겼습니다.
+        /// </summary>
+        public event SessionDisconnectedEventHandler OnSessionDisconnected;
 
         internal virtual bool RaiseConnectionEvent(IPEndPoint endPoint, uint protocolVersion, 
             ReadOnlyMemory<byte> protocolName, out int blockCode) {
@@ -39,6 +44,13 @@
             var (cBufferSize, cState) = e;
             bufferSize = cBufferSize;
             state = cState;
+        }
+
+        internal virtual void RaiseSessionDisconnectedEvent(IPEndPoint? endPoint, SessionDisconnectedStatusCode statusCode, int code, string message) {
+            if (OnSessionDisconnected == null) return;
+
+            var e = new SessionDisconnectedEventArgs(endPoint, statusCode, code, message);
+            OnSessionDisconnected.Invoke(this, e);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 
 namespace TraNET {
-    public delegate void ConnectionEventHandler(object sender, ConnectionEventArgs e);
+    public delegate void SessionConnectionEventHandler(object sender, ConnectionEventArgs e);
     public delegate void SessionStartEventHandler(object sender, SessionInfoEventArgs e);
     public delegate void SessionReadyEventHandler(object sender, SessionReadyEventArgs e);
+    public delegate void SessionDisconnectedEventHandler(object sender, SessionDisconnectedEventArgs e);
 
     /// <summary>
     /// 접속 이벤트
@@ -114,4 +115,70 @@ namespace TraNET {
             Client = client;
         }
     }
+
+    /// <summary>
+    /// 세션 연결 끊김.
+    /// </summary>
+    public class SessionDisconnectedEventArgs {
+        /// <summary>
+        /// IP 주소
+        /// </summary>
+        public IPEndPoint? IPEndPoint { get; }
+
+        /// <summary>
+        /// 상태 코드
+        /// </summary>
+        public SessionDisconnectedStatusCode StatusCode { get; }
+
+        /// <summary>
+        /// 코드
+        /// </summary>
+        public int Code { get; }
+
+        /// <summary>
+        /// 메시지
+        /// </summary>
+        public string Message { get; }
+
+        public SessionDisconnectedEventArgs(IPEndPoint? iPEndPoint, SessionDisconnectedStatusCode disconnectedCode, int code, string message) {
+            IPEndPoint = iPEndPoint;
+            StatusCode = disconnectedCode;
+            Code = code;
+            Message = message;
+        }
+    }
+
+    /// <summary>
+    /// 세션 연결 끊김
+    /// </summary>
+    public enum SessionDisconnectedStatusCode {
+        /// <summary>
+        /// TCP 단계에서 연결이 끊겼습니다.
+        /// </summary>
+        Disconnected,
+        /// <summary>
+        /// 지원하지 않는 버전
+        /// </summary>
+        UnsupportedVersion,
+        /// <summary>
+        /// 프로토콜이 일치하지 않음
+        /// </summary>
+        ProtocolMismatch,
+        /// <summary>
+        /// 프로토콜 위반
+        /// </summary>
+        ProtocolViolation,
+        /// <summary>
+        /// 취소됨
+        /// </summary>
+        Canceled,
+        /// <summary>
+        /// 대상이 연결을 끊었습니다.
+        /// </summary>
+        Closed,
+        /// <summary>
+        /// 내부 오류
+        /// </summary>
+        InternalError,
+}
 }

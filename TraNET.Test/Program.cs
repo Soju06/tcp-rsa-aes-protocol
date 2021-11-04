@@ -15,5 +15,14 @@ class program {
         client.Connect(System.Net.IPAddress.Loopback, 1011, TraNet.DefaultProtocolName.ToArray());
 
         Console.WriteLine(Encoding.UTF8.GetString(client.SessionInfo.State.Value.ToArray()) + ".");
+
+        Console.WriteLine(server.SessionCount);
+        client.Close();
+        for (int i = 0; i < 10; i++) {
+            Console.WriteLine(server.SessionCount);
+            Thread.Sleep(1000);
+        }
+
+        Console.ReadLine();
     }
 }

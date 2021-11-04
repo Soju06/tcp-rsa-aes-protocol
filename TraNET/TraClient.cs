@@ -48,6 +48,7 @@
             var endPoint = (IPEndPoint)client.Client.RemoteEndPoint;
             this.port = port;
             address = endPoint.Address;
+            IPEndPoint = endPoint;
             ConnectionProcess(greetingData);
         }
 
@@ -80,6 +81,7 @@
             client.Connect(endPoint);
             port = endPoint.Port;
             address = endPoint.Address;
+            IPEndPoint = endPoint;
             ConnectionProcess(greetingData);
         }
 
@@ -114,6 +116,7 @@
             client.Connect(address, port);
             this.port = port;
             this.address = address;
+            IPEndPoint = new IPEndPoint(address, port);
             ConnectionProcess(greetingData);
         }
 
@@ -138,6 +141,11 @@
         /// </summary>
         /// <exception cref="NotSupportedException" />
         public int Port => port != -1 ? port : throw new NotSupportedException("주소가 없습니다.");
+
+        /// <summary>
+        /// IP 주소
+        /// </summary>
+        public IPEndPoint IPEndPoint { get; private set; }
 
         /// <summary>
         /// 세션 정보
@@ -172,6 +180,13 @@
                             cancel?.Cancel();
 
                         stream?.Dispose();
+
+                        try {
+                            Disconnect();
+                        } catch {
+
+                        }
+
                         client?.Close();
                         cancel?.Dispose();
                     } catch {

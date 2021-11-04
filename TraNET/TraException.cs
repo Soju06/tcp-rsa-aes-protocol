@@ -39,7 +39,12 @@
     public class ProtocolCancellationException : Exception {
         public ProtocolCancellationException() { }
         public ProtocolCancellationException(string message) : base(message) { }
-        public ProtocolCancellationException(string message, int code) : base(message + $" (CODE: {code})") { }
+        public ProtocolCancellationException(string message, int code) : base(message + $" (CODE: {code})") { Code = code; }
         public ProtocolCancellationException(string message, Exception inner) : base(message, inner) { }
+
+        /// <summary>
+        /// 코드
+        /// </summary>
+        public int Code { get; }
     }
 }

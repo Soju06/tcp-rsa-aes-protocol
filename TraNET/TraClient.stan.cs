@@ -3,7 +3,7 @@
         protected byte tagSwapNumber;
 
         protected virtual void ThrowViolationPacketException(TraStatusCode statusCode) =>
-                    throw new ProtocolViolationException($"대상이 올바르지 않은 패킷을 보냈습니다. status: {statusCode}");
+                    throw new ProtocolViolationException($"11 대상이 올바르지 않은 패킷을 보냈습니다. status: {statusCode}");
 
         protected virtual void ThrowCancelException(int count, byte[] receive, string message) {
             if (count < 1 + sizeof(int)) throw new ProtocolCancellationException(message);
@@ -23,5 +23,11 @@
                 ThrowViolationPacketException(statusCode);
             else count -= index;
         }
+
+        protected async Task SendMessageAsync(TraStatusCode statusCode, int code, CancellationToken token) =>
+            await stream.SendPacketAsync(statusCode, BitConverter.GetBytes(code), token);
+
+        protected void SendMessage(TraStatusCode statusCode, int code) =>
+            stream.SendPacket(statusCode, BitConverter.GetBytes(code));
     }
 }
